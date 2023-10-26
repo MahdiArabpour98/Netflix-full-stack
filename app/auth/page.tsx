@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useCallback } from "react";
 
 import Input from "@/components/input";
+import axios from "axios";
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +15,14 @@ const AuthPage = () => {
 
   const toggleVariant = useCallback(() => {
     setVariant((currentvariant) => (currentvariant === "login" ? "register" : "login"));
+  }, []);
+
+  const register = useCallback(async () => {
+    try {
+      await axios.post("/api/register", { email, name, password });
+    } catch (error) {
+      console.log("error", error);
+    }
   }, []);
 
   return (
