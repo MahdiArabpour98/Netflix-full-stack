@@ -21,9 +21,9 @@ const AuthPage = () => {
     try {
       await axios.post("/api/register", { email, name, password });
     } catch (error) {
-      console.log("error", error);
+      console.log("post_error", error);
     }
-  }, []);
+  }, [email, name, password]);
 
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-cover bg-center bg-fixed">
@@ -37,7 +37,7 @@ const AuthPage = () => {
               {variant === "login" ? "Sign in" : "Register"}
             </h2>
             <div className="flex flex-col gap-4">
-              {variant === "login" && (
+              {variant === "register" && (
                 <Input
                   label="Username"
                   onChange={(event: any) => setName(event.target.value)}
@@ -60,7 +60,10 @@ const AuthPage = () => {
                 value={password}
               />
             </div>
-            <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition">
+            <button
+              onClick={register}
+              className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+            >
               {variant === "login" ? "Login" : "Sign up"}
             </button>
             <p className="text-neutral-500 mt-12">
