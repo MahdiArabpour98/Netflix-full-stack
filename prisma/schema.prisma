@@ -29,8 +29,8 @@ model Account {
   id                String  @id @default(uuid())
   userId            String
   type              String
-  provider          String
-  providerAccountId String
+  provider          String  @unique
+  providerAccountId String  @unique
   refresh_token     String?
   access_token      String?
   expires_at        Int?
